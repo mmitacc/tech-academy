@@ -1,0 +1,49 @@
+<svg svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" width="100%" height="100%">
+  <defs>
+    <!-- Gradiente Dorado Premium -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BF953F" />
+      <stop offset="25%" stop-color="#FCF6BA" />
+      <stop offset="50%" stop-color="#B38728" />
+      <stop offset="75%" stop-color="#FBF5B7" />
+      <stop offset="100%" stop-color="#AA771C" />
+    </linearGradient>
+    
+    <!-- Filtro de Sombra Suave -->
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(10, 10)">
+    <!-- ICONO: Escudo de Academia + Trazos Tecnológicos -->
+    <g filter="url(#dropShadow)">
+      <!-- Escudo exterior / Isotipo hexagonal estilizado -->
+      <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="url(#goldGradient)" stroke-width="4" stroke-linejoin="round"/>
+      
+      <!-- Líneas de circuito interno -->
+      <path d="M50,20 L50,45 M35,35 L50,45 L65,35" fill="none" stroke="url(#goldGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <!-- Nodos de tecnología (Círculos) -->
+      <circle cx="50" cy="20" r="4" fill="url(#goldGradient)"/>
+      <circle cx="35" cy="35" r="4" fill="url(#goldGradient)"/>
+      <circle cx="65" cy="35" r="4" fill="url(#goldGradient)"/>
+      
+      <!-- Base de la estructura o birrete abstracto -->
+      <path d="M30,65 L50,75 L70,65 L50,55 Z" fill="url(#goldGradient)" opacity="0.8"/>
+    </g>
+
+    <!-- TEXTO: Tech-Academy -->
+    <!-- "Tech" en tipografía bold moderna -->
+    <text x="120" y="55" font-family="'Inter', 'Segoe UI', sans-serif" font-size="42" font-weight="800" fill="url(#goldGradient)" letter-spacing="1">TECH</text>
+    
+    <!-- Guion estilizado -->
+    <rect x="240" y="40" width="15" height="5" rx="2" fill="url(#goldGradient)" />
+    
+    <!-- "ACADEMY" con peso más ligero y elegante -->
+    <text x="268" y="55" font-family="'Inter', 'Segoe UI', sans-serif" font-size="42" font-weight="300" fill="url(#goldGradient)" letter-spacing="2">ACADEMY</text>
+    
+    <!-- Subtexto / Tagline -->
+    <text x="122" y="82" font-family="'Inter', 'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="url(#goldGradient)" letter-spacing="6" opacity="0.9">EXCELLENCE IN CODE</text>
+  </g>
+</svg>
