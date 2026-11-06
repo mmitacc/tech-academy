@@ -5,6 +5,8 @@ import {
   ClipboardList,
   Clock,
 } from "lucide-react";
+import { useAuthStore } from "../store/useAuthStore";
+import { Link } from "react-router";
 
 // Interfaces básicas para simulación de datos tipados si lo requieres
 interface Inscripcion {
@@ -55,6 +57,8 @@ const cursos: CursoCupo[] = [
 ];
 
 export function InicioPage() {
+  const nombre = useAuthStore((s) => s.usuario?.nombre);
+  const apellido = useAuthStore((s) => s.usuario?.apellido);
   return (
     <>
       {/* Banner de Bienvenida Estilizado */}
@@ -63,15 +67,18 @@ export function InicioPage() {
           Semestre 2026 - II
         </p>
         <h1 className="mt-1 text-2xl font-bold sm:text-3xl tracking-tight">
-          ¡Hola, Ana!
+          ¡Hola, {nombre} {apellido}!
         </h1>
         <p className="mt-2 max-w-xl text-sm text-(--color-marca-50) opacity-90 leading-relaxed">
           Tienes 2 cursos activos. Revisa tus calificaciones y no olvides las
           fechas de inscripción vigentes.
         </p>
-        <button className="mt-5 inline-flex items-center justify-center bg-(--color-marca-50) hover:bg-(--color-marca-100) text-(--color-marca-700) font-semibold text-sm px-4 py-2.5 rounded-xl transition-colors cursor-pointer shadow-xs">
+        <Link
+          to="/cursos"
+          className="mt-5 inline-flex items-center justify-center bg-(--color-marca-50) hover:bg-(--color-marca-250) text-(--color-marca-500) font-semibold text-sm px-4 py-2.5 rounded-xl transition-colors cursor-pointer shadow-xs"
+        >
           Explorar cursos
-        </button>
+        </Link>
       </div>
 
       {/* Grid de Tarjetas Estadísticas Nativas */}

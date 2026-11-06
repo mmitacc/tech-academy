@@ -7,4 +7,9 @@ export const cursosService = {
     const result = await api.get<RespuestaApi<Curso[]>>("/cursos");
     return result.data.data;
   },
+
+  getPorId: async (id: number): Promise<Curso> => {
+    const result = await api.get<RespuestaApi<Curso>>(`/cursos/${id}`);
+    return result.data.data;
+  },
 };

@@ -1,4 +1,5 @@
-import { Search } from "lucide-react";
+import { useState } from "react";
+import { Search, RefreshCw } from "lucide-react";
 import { TarjetaCurso } from "../components/TarjetaCurso";
 import { cursosService } from "../services/cursos";
 import { useApi } from "../hooks/useApi";
@@ -17,7 +18,20 @@ export function CursosPage() {
     data: cursos,
     cargando,
     error,
+    recargar,
   } = useApi(() => cursosService.getTodos());
+
+  const [busqueda, setBusqueda] = useState("");
+
+  const cursosFiltrados = cursos?.filter((curso) => {
+    const termino = busqueda.toLowerCase().trim();
+    if (!termino) return true;
+
+    const coincideNombre = curso.nombre?.toLowerCase().includes(termino);
+    const coincideCodigo = curso.codigo?.toLowerCase().includes(termino);
+
+    return coincideNombre || coincideCodigo;
+  });
 
   return (
     <div className="space-y-6">
@@ -41,6 +55,8 @@ export function CursosPage() {
           <input
             type="text"
             placeholder="Buscar por nombre o código..."
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
             className="w-full rounded-xl border border-(--color-marca-200) bg-(--color-marca-50) py-2.5 pr-3 pl-10 text-sm text-stone-800 placeholder-stone-400 focus:border-(--color-marca-500) focus:outline-none transition-colors"
           />
         </div>
@@ -69,21 +85,37 @@ export function CursosPage() {
       )}
 
       {error && (
-        <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm font-medium text-center shadow-xs">
-          {error}
+        <div className="p-6 rounded-2xl bg-red-50 border border-red-200 text-center max-w-md mx-auto shadow-xs space-y-3">
+          <p className="text-sm font-semibold text-red-700">{error}</p>
+          <button
+            onClick={recargar}
+            className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors cursor-pointer"
+          >
+            <RefreshCw size={14} className={cargando ? "animate-spin" : ""} />
+            <span>Reintentar cargar</span>
+          </button>
         </div>
       )}
 
       {!cargando && !error && (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4-custom">
-          {cursos?.map((curso) => (
-            <TarjetaCurso
-              key={curso.id}
-              curso={curso}
-              inscrito={curso.id === 1 || curso.id === 3}
-            />
-          ))}
-        </div>
+        <>
+          {cursosFiltrados && cursosFiltrados.length > 0 ? (
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4-custom">
+              {cursosFiltrados.map((curso) => (
+                <TarjetaCurso
+                  key={curso.id}
+                  curso={curso}
+                  inscrito={curso.id === 1 || curso.id === 3}
+                />
+              ))}
+            </div>
+          ) : (
+            // Mensaje nativo si la búsqueda no arroja coincidencias
+            <div className="py-12 text-center text-stone-400 text-sm font-medium">
+              No se encontraron cursos que coincidan con "{busqueda}"
+            </div>
+          )}
+        </>
       )}
     </div>
   );

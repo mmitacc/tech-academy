@@ -1,7 +1,9 @@
 import React from "react";
 import { Bell, User } from "lucide-react";
+import { useAuthStore } from "../../store/useAuthStore";
 
 export const BarraSuperior: React.FC = () => {
+  const rolUsuario = useAuthStore((s) => s.usuario?.rol);
   return (
     <header className="h-16 bg-(--color-marca-50) border-b border-(--color-marca-200) flex items-center justify-between px-6 sticky top-0 z-40">
       {/* Área del Logo */}
@@ -95,7 +97,7 @@ export const BarraSuperior: React.FC = () => {
             <User className="w-4 h-4" />
           </div>
           <span className="text-sm font-medium text-stone-700 hidden sm:inline">
-            Admin
+            {rolUsuario}
           </span>
         </div>
       </div>

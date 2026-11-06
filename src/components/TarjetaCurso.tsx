@@ -1,5 +1,6 @@
 import { Clock, User } from "lucide-react";
 import type { Curso } from "../types/curso";
+import { Link } from "react-router";
 
 interface Props {
   curso: Curso;
@@ -69,9 +70,15 @@ export function TarjetaCurso({ curso, inscrito = false }: Props) {
 
         {/* Botones de Acción HTML Tradicionales */}
         <div className="mt-6 flex gap-2 pt-1">
-          <button className="flex-1 inline-flex items-center justify-center border border-(--color-marca-200) bg-(--color-marca-50) hover:bg-(--color-marca-100) text-stone-700 font-semibold text-xs py-2.5 rounded-xl transition-colors cursor-pointer">
+          <Link
+            to={`/cursos/${curso.id}`}
+            className="flex-1 inline-flex items-center justify-center border border-(--color-marca-200) bg-(--color-marca-50) hover:bg-(--color-marca-100) text-stone-700 font-semibold text-xs py-2.5 rounded-xl transition-colors cursor-pointer"
+          >
             Ver detalle
-          </button>
+          </Link>
+          {/* <button className="flex-1 inline-flex items-center justify-center border border-(--color-marca-200) bg-(--color-marca-50) hover:bg-(--color-marca-100) text-stone-700 font-semibold text-xs py-2.5 rounded-xl transition-colors cursor-pointer">
+            Ver detalle
+          </button> */}
 
           {inscrito ? (
             <button

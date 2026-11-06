@@ -8,6 +8,8 @@ import { NoEncontradaPage } from "./components/NoEncontradaPage";
 import { RutaProtegida } from "./components/RutaProtegida";
 import { EstudiantesPage } from "./pages/EstudiantesPage";
 import { LayoutApp } from "./components/Layout/LayoutApp";
+import { MisInscripcionesPage } from "./pages/MisInscripcionesPage";
+import { CursoDetallePage } from "./pages/CursoDetallePage";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
       <Route element={<LayoutApp />}>
         <Route path="/inicio" element={<InicioPage />} />
         <Route path="/perfil" element={<PerfilPage />} />
+        <Route path="/inscripciones" element={<MisInscripcionesPage />} />
+        <Route path="/cursos/:id" element={<CursoDetallePage />} />
 
         {/* Rutas protegidas por Rol ADMIN */}
         <Route element={<RutaProtegida roles={["ADMIN"]} />}>
@@ -32,7 +36,6 @@ function App() {
         </Route>
       </Route>
 
-      {/* 👈 CORREGIDO: Se cambia path="" por path="*" para capturar cualquier error 404 */}
       <Route path="*" element={<NoEncontradaPage />} />
     </Routes>
   );

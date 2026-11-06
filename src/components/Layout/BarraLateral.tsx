@@ -7,6 +7,7 @@ import {
   BookOpenCheck,
   Settings,
   LogOut,
+  ClipboardCheck,
 } from "lucide-react";
 import { useAuthStore } from "../../store/useAuthStore";
 
@@ -18,6 +19,7 @@ export const BarraLateral: React.FC = () => {
     { icon: LayoutDashboard, label: "Dashboard", to: "/inicio" },
     { icon: GraduationCap, label: "Cursos", to: "/cursos" },
     { icon: Users, label: "Estudiantes", to: "/estudiantes" },
+    { icon: ClipboardCheck, label: "Inscripciones", to: "/inscripciones" },
     { icon: BookOpenCheck, label: "Certificaciones", to: "/certificaciones" },
     { icon: Settings, label: "Configuración", to: "/perfil" },
   ];
